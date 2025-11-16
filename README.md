@@ -11,7 +11,7 @@ tags:
 ## Introduction
 
 **PyAXEngine** provides a Python API for the Axera NPU Runtime using the cffi module. The Python API is similar to ONNX Runtime and supports both development boards and M.2 accelerator cards to help community developers rapidly prototype.
-Python 脚本快速构建 NPU 推理脚本
+Python scripts for quickly building NPU inference programs
 
 Supported chips
 
@@ -29,23 +29,23 @@ Environment / Version
 
 *Note: AX650 SDK versions prior to 2.18 and AX620E SDK versions prior to 3.12 do not support bf16. LLM models may report unknown dtype. Please upgrade accordingly.*
 
-*如果您评估认为不知道如何升级 SDK，也可以提交 issue 索要下载，不需要更新完整 SDK，只更新 libax_engine.so 即可*
+*If you are unsure how to upgrade the SDK, you can open an issue to request a download of the updated `libax_engine.so` rather than a full SDK upgrade.*
 
-## 快速上手
+## Quick start
 
-基于社区开发板 **爱芯派Pro(AX650N)** 进行展示
+Demonstrated on the community dev board: **AiXinPai Pro (AX650N)**
 
-### 获取 wheel 包并安装
+### Get wheel package and install
 
 - [下载链接](https://github.com/AXERA-TECH/pyaxengine/releases/latest)
-- 将 `axengine-x.x.x-py3-none-any.whl` 拷贝到开发板上，执行 `pip install axengine-x.x.x-py3-none-any.whl` 安装
+- Copy the `axengine-x.x.x-py3-none-any.whl` onto your board and install it using `pip install axengine-x.x.x-py3-none-any.whl`.
 
-### 简单示例
+### Simple example
 
-当前示例需要分别依赖 PIL 和 OpenCV，可以用 `pip install pillow opencv-python-headless` 安装。其中 `opencv-python-headless` 是 OpenCV 的 headless 版本，不依赖 GUI(非 headless 的版本需要依赖 OpenGL ES，运行环境中并没有)。
+This example requires PIL and OpenCV. Install them with `pip install pillow opencv-python-headless`. The `opencv-python-headless` package is a headless build that does not depend on a GUI; the non-headless build requires OpenGL ES, which may not be available in the runtime environment.
 
 ```python
-将 [classification.py](https://github.com/AXERA-TECH/pyaxengine/blob/main/examples/classification.py) 拷贝到开发板上并执行。
+Copy [classification.py](https://github.com/AXERA-TECH/pyaxengine/blob/main/examples/classification.py) to the device and run it.
 
 ```bash
 root@ax650:~/samples# python3 classification.py -m /opt/data/npu/models/mobilenetv2.axmodel -i /opt/data/npu/images/cat.jpg
@@ -68,10 +68,10 @@ root@ax650:~/samples# python3 classification.py -m /opt/data/npu/models/mobilene
   ------------------------------------------------------
 ```
 
-示例也演示了如何选择计算设备：这意味着既可以在 **AX650/AX630C** 等开发板上运行，也可以在 AX650 M.2 算力卡上运行。
+The example also demonstrates how to switch compute devices. It can run on development boards such as **AX650/AX630C** or on the AX650 M.2 accelerator card.
 
-切换计算设备的方式是通过 `-p` 参数指定，如 `-p AxEngineExecutionProvider` 表示使用开发板上的 NPU 进行推理，而 `-p AXCLRTExecutionProvider` 表示使用 M.2 算力卡进行推理。
-注意：在使用 M.2 算力卡进行推理时，需要将算力卡插入宿主机上，并且已经安装驱动，详见： [axcl](https://axcl-docs.readthedocs.io/zh-cn/latest/)。
+Use the `-p` parameter to select the compute provider: `-p AxEngineExecutionProvider` uses the on-board NPU, while `-p AXCLRTExecutionProvider` uses the M.2 accelerator card.
+Note: When using the M.2 accelerator card, ensure the card is installed in the host and the appropriate drivers are installed. See: [AXCL docs](https://axcl-docs.readthedocs.io/zh-cn/latest/).
 
 ```bash
 root@ax650:~/samples# python3 classification.py -m /opt/data/npu/models/mobilenetv2.axmodel -i /opt/data/npu/images/cat.jpg -p AXCLRTExecutionProvider
@@ -110,13 +110,13 @@ root@ax650:~/samples# python3 classification.py -m /opt/data/npu/models/mobilene
   ------------------------------------------------------
 ```
 
-## 社区贡献者
+## Community contributors
 
 - [zylo117](https://github.com/zylo117): 提供了基于 cffi 的 AXCL Runtime Python API 实现
 - [nnn](https://github.com/nnn112358)，[HongJie Li](https://github.com/techshoww) 和 [Shinichi Tanaka](https://github.com/s1tnk) 报告 cffi 的使用问题，[Shinichi Tanaka](https://github.com/s1tnk) 提供了解决方案
 
 
-## 关联项目
+## Related projects
 
 - [ax-samples](https://github.com/AXERA-TECH/ax-samples)
 - [ax-llm](https://github.com/AXERA-TECH/ax-llm)
