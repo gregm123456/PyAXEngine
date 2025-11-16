@@ -8,26 +8,26 @@ tags:
 - AXEngine
 ---
 
-## 简介
+## Introduction
 
-**PyAXEngine** 基于 cffi 模块实现了 Axera NPU Runtime 的 Python API，其 Python API 与 ONNXRuntime 高度兼(相)容(似)，并同时支持开发板和M.2算力卡形态，方便开源社区开发者使用
+**PyAXEngine** provides a Python API for the Axera NPU Runtime using the cffi module. The Python API is similar to ONNX Runtime and supports both development boards and M.2 accelerator cards to help community developers rapidly prototype.
 Python 脚本快速构建 NPU 推理脚本
 
-支持芯片
+Supported chips
 
 - AX650N
 - AX630C
 
-环境版本
+Environment / Version
 
 - python >= 3.8
 - cffi >= 1.0.0
 - ml-dtypes >= 0.1.0
 - numpy >= 1.22.0
 
-*需要注意的是，如果您的开发环境是算力卡，那么更建议您优先考虑使用 [pyAXCL](https://github.com/AXERA-TECH/pyaxcl) 进行项目开发；pyAXCL 项目完整包含了算力卡形态的全部 API，更适合用于正式部署；PyAXEngine 项目更适合算法工程师进行快速原型验证，且用于计算卡环境时，PyAXEngine 不能调用编解码等模块(不是 PyAXEngine 的设计目标)。*
+*Note: If your development environment is a compute card, we recommend the [pyAXCL](https://github.com/AXERA-TECH/pyaxcl) project for production development, as it contains the full API for compute card environments. PyAXEngine is better suited for rapid prototyping by algorithm engineers and cannot call some codec-related modules on card environments (this is not a design goal of PyAXEngine).* 
 
-*AX650 SDK 2.18，AX620E SDK 3.12 以前的版本不支持 bf16，llm 模型会有返回 unknown 的 dtype问题，请注意升级*
+*Note: AX650 SDK versions prior to 2.18 and AX620E SDK versions prior to 3.12 do not support bf16. LLM models may report unknown dtype. Please upgrade accordingly.*
 
 *如果您评估认为不知道如何升级 SDK，也可以提交 issue 索要下载，不需要更新完整 SDK，只更新 libax_engine.so 即可*
 
